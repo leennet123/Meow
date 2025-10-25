@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 19th Birthday, Diya!</title>
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Load custom fonts from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- 3. Configure Tailwind to use these fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        handwriting: ['Pacifico', 'cursive'],
+                    },
+                    colors: {
+                        'brand-cream': '#FFF7F0',
+                        'brand-pink': '#E63946',
+                        'brand-light-pink': '#FADADD',
+                        'brand-teal': '#457B9D',
+                        'brand-dark': '#1D3557',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- 4. Custom styles for specific elements -->
+    <style>
+        /* This applies the 'Inter' font to the whole page */
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom class for the polaroid photo effect */
+        .polaroid {
+            background: #ffffff;
+            padding: 1rem;
+            padding-bottom: 3rem; /* Taller bottom border for the caption */
+            border-radius: 4px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.12);
+            position: relative; /* Needed for the caption */
+        }
+
+        .polaroid-caption {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            text-align: center;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.25rem;
+            color: #555;
+        }
+
+        /* Animation for the hero section */
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Staggered animation delays */
+        .fade-in-up-1 { animation-delay: 0.2s; }
+        .fade-in-up-2 { animation-delay: 0.4s; }
+        .fade-in-up-3 { animation-delay: 0.6s; }
+        .fade-in-up-4 { animation-delay: 0.8s; }
+
+        /* Subtle background pattern */
+        body {
+            background-color: #FFF7F0; /* brand-cream */
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FADADD' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-brand-dark">
+
+    <!-- ========== Hero Section ========== -->
+    <header class="container mx-auto px-4 py-16 md:py-24 text-center overflow-hidden">
+        <h1 class="font-handwriting text-5xl sm:text-7xl md:text-8xl text-brand-pink fade-in-up">
+            Happy 19th Birthday,
+        </h1>
+        <h2 class="text-6xl sm:text-8xl md:text-9xl font-bold text-brand-dark mt-2 fade-in-up fade-in-up-1">
+            Diya!
+        </h2>
+        
+        <!-- Custom Polaroid Element -->
+        <div class="mt-12 w-64 sm:w-80 mx-auto fade-in-up fade-in-up-2" style="transform: rotate(-3deg);">
+            <div class="polaroid transition-transform duration-300 hover:rotate(2deg) hover:scale-105">
+                <img src="meow1.JPG" 
+                     alt="A happy photo of Diya" 
+                     class="w-full h-auto"
+                     onerror="this.src='https://placehold.co/400x400/FADADD/1D3557?text=Birthday+Joy!&font=pacifico'">
+                <p class="polaroid-caption">The Big 1-9!</p>
+            </div>
+        </div>
+        
+        <p class="max-w-2xl mx-auto text-lg md:text-xl mt-12 text-brand-dark/80 fade-in-up fade-in-up-3">
+            Happy Birthday Meowmeow, May this year be the best of all. You are turning 19 yeayyy, Ik its a bit cringe but I hope you like it.
+        </p>
+    </header>
+
+    <!-- ========== Countdown Timer ========== -->
+    <section class="py-12 bg-brand-light-pink shadow-inner fade-in-up fade-in-up-4">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-brand-dark mb-6">Birthday Countdown!</h2>
+            <p class="text-lg text-brand-dark/80 mb-8">Counting down to the big day...</p>
+            
+            <div id="countdown" class="flex flex-wrap justify-center gap-4 sm:gap-8">
+                <!-- JS will populate this -->
+                <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg w-24 text-center">
+                    <span id="days" class="text-4xl sm:text-5xl font-bold text-brand-pink">0</span>
+                    <span class="block text-sm text-brand-teal uppercase mt-1">Days</span>
+                </div>
+                <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg w-24 text-center">
+                    <span id="hours" class="text-4xl sm:text-5xl font-bold text-brand-pink">0</span>
+                    <span class="block text-sm text-brand-teal uppercase mt-1">Hours</span>
+                </div>
+                <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg w-24 text-center">
+                    <span id="minutes" class="text-4xl sm:text-5xl font-bold text-brand-pink">0</span>
+                    <span class="block text-sm text-brand-teal uppercase mt-1">Minutes</span>
+                </div>
+                <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg w-24 text-center">
+                    <span id="seconds" class="text-4xl sm:text-5xl font-bold text-brand-pink">0</span>
+                    <span class="block text-sm text-brand-teal uppercase mt-1">Seconds</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== Photo Gallery ========== -->
+    <section class="py-16 md:py-24 bg-brand-teal/10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-brand-dark mb-4">Our Memories</h2>
+            <p class="font-handwriting text-3xl text-center text-brand-pink mb-12">A look back at the good times</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <!-- Gallery Image 1 -->
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="meow2.jpg" alt="Gallery image 1" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/E63946/FFFFFF?text=Our+Trip'">
+                </div>
+                <!-- Gallery Image 2 -->
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl md:mt-8">
+                    <img src="meow3.jpg" alt="Gallery image 2" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/FADADD/1D3557?text=Graduation'">
+                </div>
+                <!-- Gallery Image 3 -->
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="meow4.jpg" alt="Gallery image 3" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/1D3557/FFFFFF?text=That+Time...&font=inter'">
+                </div>
+                <!-- Gallery Image 4 -->
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl md:mt-8">
+                    <img src="meow5.jpg" alt="Gallery image 4" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/457B9D/FFFFFF?text=Old+Times'">
+                </div>
+                <!-- Gallery Image 5 -->
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="meow6.jpg" alt="Gallery image 5" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/FADADD/1D3557?text=Hiking'">
+                </div>
+                <!-- Gallery Image 6 -->
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl md:mt-8">
+                    <img src="meow7.jpg" alt="Gallery image 6" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/E63946/FFFFFF?text=The+Beach'">
+                </div>
+                <!-- Gallery Image 7 -->
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img src="meow8.jpg" alt="Gallery image 7" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/457B9D/FFFFFF?text=Just+Chilling'">
+                </div>
+                <!-- Gallery Image 8 -->
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl md:mt-8">
+                    <img src="meow9.jpg" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/1D3557/FFFFFF?text=Always+Smiling&font=inter'">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl md:mt-8">
+                    <img src="meow10.jpg" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/1D3557/FFFFFF?text=Always+Smiling&font=inter'">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl md:mt-8">
+                    <img src="meow11.jpg" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/1D3557/FFFFFF?text=Always+Smiling&font=inter'">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl md:mt-8">
+                    <img src="meow12.jpg" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/1D3557/FFFFFF?text=Always+Smiling&font=inter'">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl md:mt-8">
+                    <img src="meow13.JPG" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer gallery-item" onerror="this.src='https://placehold.co/400x400/1D3557/FFFFFF?text=Always+Smiling&font=inter'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== Birthday Wishes (Scrapbook Style) ========== -->
+    <section class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-brand-dark mb-12">Messages from the Heart</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <!-- Wish 1 -->
+                 <div class="bg-yellow-50 p-6 rounded-lg shadow-lg transform -rotate-2 transition-transform duration-300 hover:rotate-0 hover:scale-105">
+                    <p class="text-lg text-brand-dark/90 mb-4">"★ HAPPY BIRTHDAY DIYA BOOM BOOM
+happy happy happy happy happy happy 19th !!!
+i hope your day goes grand,, 
+we will be spending time together okay???
+turning 19 is the most boring age btw, and you know what's funny you're 19 with no licence LMAO 
+and i know i am not one to express love verbally much but i do want you to know that i love you a lotttttttt ♡ 
+anyways bye bye meow meow ★"</p>
+                    <p class="font-handwriting text-2xl text-brand-pink text-right">- Dee</p>
+                </div>
+
+                <div class="bg-yellow-50 p-6 rounded-lg shadow-lg transform -rotate-2 transition-transform duration-300 hover:rotate-0 hover:scale-105">
+                    <p class="text-lg text-brand-dark/90 mb-4">"Hi Doya :D
+I hope you know that you look very banger post oomf today, and I’m hoping your day is very banger post as well. Please stay prepared to be bombarded with love and affection when I see you again; in lieu of the momentous occasion of your birth. Although not the most ideal set up, I hope your birthday is as wonderful and special as you are to me.
+Happy birthday Diya 🩷"</p>
+                    <p class="font-handwriting text-2xl text-brand-pink text-right">- Trisha</p>
+                </div>
+                
+                <!-- Wish 2 -->
+                <div class="bg-blue-50 p-6 rounded-lg shadow-lg transform rotate-1 transition-transform duration-300 hover:rotate-0 hover:scale-105 md:mt-8">
+                    <p class="text-lg text-brand-dark/90 mb-4">"Happiestt bday gorgeous! Alwayss myy fav and forever. Im blessed to have you in my life and you are my saviour whenever im in my downside. Even though we met as complete unexpected amd became roomies now you are more than that to be and alwayss will be my fav🥹Happyyyy birthdayyy gurlll🫶🏻."</p>
+                    <p class="font-handwriting text-2xl text-brand-teal text-right">- Gouri</p>
+                </div>
+
+                <div class="bg-pink-50 p-6 rounded-lg shadow-lg transform -rotate-1 transition-transform duration-300 hover:rotate-0 hover:scale-105">
+                    <p class="text-lg text-brand-dark/90 mb-4">"Happy Birthday Diyaaaa! You're stunning, creative, and you do things your own way. Wishing you a day that's as unique and wonderful as you are."</p>
+                    <p class="font-handwriting text-2xl text-brand-pink text-right">- Ciya</p>
+                </div>
+                
+                <!-- Wish 3 -->
+                <div class="bg-pink-50 p-6 rounded-lg shadow-lg transform -rotate-1 transition-transform duration-300 hover:rotate-0 hover:scale-105">
+                    <p class="text-lg text-brand-dark/90 mb-4">"Happy Birthday Diya! You’re ridiculously talented, wickedly smart, and your sarcasm is basically the cherry on top. Here’s to a day that’s as clever and unstoppable as you"</p>
+                    <p class="font-handwriting text-2xl text-brand-pink text-right">- Malavika</p>
+                </div>
+
+                <div class="bg-pink-50 p-6 rounded-lg shadow-lg transform -rotate-1 transition-transform duration-300 hover:rotate-0 hover:scale-105">
+                    <p class="text-lg text-brand-dark/90 mb-4">"Happy birthday, my dear! From the moment I met you, I knew you were a rare mix of innocence, quiet strength, and cheerful chatter. I feel so lucky to have crossed paths with you, and I wish you all the happiness and success life has to offer. Have the happiest birthday, sweet girl!""</p>
+                    <p class="font-handwriting text-2xl text-brand-pink text-right">- Anna</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== Footer ========== -->
+    <footer class="py-12 bg-brand-dark text-brand-light-pink/70 text-center">
+        <p>Made with ❤️ to celebrate Diya.</p>
+        <p class="text-sm mt-2">© 2025</p>
+    </footer>
+
+
+    <!-- ========== Lightbox Modal ========== -->
+    <!-- This is hidden by default and appears when a gallery item is clicked -->
+    <div id="lightbox" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4 transition-opacity duration-300" onclick="closeLightbox()">
+        <button id="lightbox-close" class="absolute top-4 right-4 text-white text-5xl z-60" aria-label="Close image viewer">&times;</button>
+        <div class="relative max-w-3xl max-h-full">
+            <img id="lightbox-img" src="" alt="Enlarged gallery view" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
+        </div>
+    </div>
+
+
+    <!-- ========== JavaScript ========== -->
+    <script>
+        // --- Original Countdown Timer Logic ---
+        function startCountdown() {
+            // Set to tomorrow's date at midnight
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const countdownDate = tomorrow.getTime();
+
+            const timerInterval = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById("countdown").innerHTML = "<h3 class='text-3xl font-bold text-brand-pink'>It's your birthday!</h3>";
+                }
+            }, 1000);
+        }
+
+        // --- Original Lightbox Modal Logic ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        function openLightbox(event) {
+            const imgSrc = event.currentTarget.src;
+            lightboxImg.src = imgSrc;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            lightboxImg.src = ""; // Clear src
+        }
+
+        // Add click listeners to all gallery images
+        galleryItems.forEach(item => {
+            item.addEventListener('click', openLightbox);
+        });
+        
+        // Close lightbox when clicking the close button (defined in HTML)
+        document.getElementById('lightbox-close').addEventListener('click', (e) => {
+            e.stopPropagation(); // prevent background click
+            closeLightbox();
+        });
+
+        // --- Start everything on page load ---
+        document.addEventListener('DOMContentLoaded', (event) => {
+            startCountdown();
+        });
+    </script>
+
+</body>
+</html>
+
